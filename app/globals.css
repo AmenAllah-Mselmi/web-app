@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+@theme {
+  --color-neon-blue: #00f3ff;
+  --color-neon-green: #0aff0a;
+  --color-neon-red: #ff003c;
+  --color-neon-purple: #bc13fe;
+
+  --color-glass-100: rgba(255, 255, 255, 0.1);
+  --color-glass-200: rgba(255, 255, 255, 0.2);
+  --color-glass-300: rgba(255, 255, 255, 0.3);
+
+  --shadow-neon: 0 0 10px #00f3ff, 0 0 20px #00f3ff;
+  --shadow-neon-red: 0 0 10px #ff003c, 0 0 20px #ff003c;
+  --shadow-neon-green: 0 0 10px #0aff0a, 0 0 20px #0aff0a;
+}
+
+:root {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Utilities */
+.glass-panel {
+  background-color: var(--color-glass-100);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--color-glass-200);
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.neon-text {
+  text-shadow: 0 0 5px currentColor;
+}
+
+.floating {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
