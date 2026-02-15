@@ -3,8 +3,10 @@
 import { motion } from "framer-motion";
 import { Mail, MessageSquare, MapPin, Send } from "lucide-react";
 import { useState } from "react";
+import { useLanguage } from "@/lib/i18n";
 
 export default function ContactSection() {
+    const { t } = useLanguage();
     const [formState, setFormState] = useState({ name: "", email: "", message: "" });
     const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
 
@@ -22,9 +24,9 @@ export default function ContactSection() {
         <section id="contact" className="py-24 px-4 relative">
             <div className="max-w-7xl mx-auto">
                 <div className="text-center mb-16">
-                    <h2 className="text-4xl md:text-5xl font-bold mb-4">Get in Touch</h2>
+                    <h2 className="text-4xl md:text-5xl font-bold mb-4">{t.contact.title}</h2>
                     <p className="text-gray-400 max-w-2xl mx-auto text-lg">
-                        Have a security concern or want to partner with us? We're here to help.
+                        {t.contact.subtitle}
                     </p>
                 </div>
 
@@ -33,20 +35,20 @@ export default function ContactSection() {
                     <div className="space-y-8">
                         <ContactCard
                             icon={<Mail className="w-6 h-6 text-neon-blue" />}
-                            title="Email Us"
+                            title={t.contact.email_title}
                             content="security@phishshield.tn"
                             sub="24/7 Response time"
                         />
                         <ContactCard
                             icon={<MessageSquare className="w-6 h-6 text-neon-purple" />}
-                            title="Live Chat"
-                            content="Available in App"
+                            title={t.contact.chat_title}
+                            content={t.contact.chat_desc}
                             sub="Mon-Fri, 9am - 6pm"
                         />
                         <ContactCard
                             icon={<MapPin className="w-6 h-6 text-neon-green" />}
-                            title="Visit HQ"
-                            content="CyberPark, Tunis"
+                            title={t.contact.hq_title}
+                            content={t.contact.hq_desc}
                             sub="Tunisia"
                         />
                     </div>
@@ -63,19 +65,19 @@ export default function ContactSection() {
                                 <div className="w-16 h-16 bg-neon-green/20 rounded-full flex items-center justify-center mb-4 text-neon-green">
                                     <Send className="w-8 h-8" />
                                 </div>
-                                <h3 className="text-2xl font-bold mb-2">Message Sent!</h3>
-                                <p className="text-gray-400">Our team will get back to you shortly.</p>
+                                <h3 className="text-2xl font-bold mb-2">{t.contact.sent_title}</h3>
+                                <p className="text-gray-400">{t.contact.sent_desc}</p>
                                 <button
                                     onClick={() => setStatus("idle")}
                                     className="mt-6 text-neon-blue hover:text-white underline"
                                 >
-                                    Send another message
+                                    {t.contact.send_another}
                                 </button>
                             </div>
                         ) : (
                             <form onSubmit={handleSubmit} className="space-y-6">
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-400 mb-2">Name</label>
+                                    <label className="block text-sm font-medium text-gray-400 mb-2">{t.contact.field_name}</label>
                                     <input
                                         type="text"
                                         required
@@ -85,7 +87,7 @@ export default function ContactSection() {
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-400 mb-2">Email</label>
+                                    <label className="block text-sm font-medium text-gray-400 mb-2">{t.contact.field_email}</label>
                                     <input
                                         type="email"
                                         required
@@ -95,7 +97,7 @@ export default function ContactSection() {
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-400 mb-2">Message</label>
+                                    <label className="block text-sm font-medium text-gray-400 mb-2">{t.contact.field_message}</label>
                                     <textarea
                                         required
                                         rows={4}
@@ -109,7 +111,7 @@ export default function ContactSection() {
                                     disabled={status === "sending"}
                                     className="w-full py-4 bg-neon-blue text-black font-bold rounded-xl hover:bg-white transition-all shadow-neon flex items-center justify-center gap-2 disabled:opacity-50"
                                 >
-                                    {status === "sending" ? "Sending..." : "Send Message"}
+                                    {status === "sending" ? t.contact.sending : t.contact.send_btn}
                                     {!status && <Send className="w-5 h-5" />}
                                 </button>
                             </form>

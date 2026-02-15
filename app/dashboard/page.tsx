@@ -20,36 +20,36 @@ export default function Dashboard() {
 
     return (
         <div className="text-white">
-            <h1 className="text-3xl font-bold mb-2">Welcome back, {user?.email?.split('@')[0] || 'User'}!</h1>
-            <p className="text-gray-400 mb-8">Here is your PhishShield security overview.</p>
+            <h1 className="text-3xl font-bold mb-2">{t.dashboard.welcome} {user?.email?.split('@')[0] || 'User'}!</h1>
+            <p className="text-gray-400 mb-8">{t.dashboard.security_overview}</p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                <StatCard icon={Shield} label="Risk Score" value="Low" color="text-neon-green" />
-                <StatCard icon={Activity} label="Recent Scans" value="12" color="text-neon-blue" />
-                <StatCard icon={Users} label="Community Rep" value="Beginner" color="text-neon-purple" />
-                <StatCard icon={BookOpen} label="Academy XP" value="350" color="text-yellow-400" />
+                <StatCard icon={Shield} label={t.dashboard.risk_score} value={t.scan.safe} color="text-neon-green" />
+                <StatCard icon={Activity} label={t.dashboard.recent_scans} value="12" color="text-neon-blue" />
+                <StatCard icon={Users} label={t.dashboard.community_rep} value="Beginner" color="text-neon-purple" />
+                <StatCard icon={BookOpen} label={t.dashboard.academy_xp} value="350" color="text-yellow-400" />
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div className="glass-panel p-6">
-                    <h2 className="text-xl font-bold mb-4">Recent Activity</h2>
+                    <h2 className="text-xl font-bold mb-4">{t.dashboard.recent_activity}</h2>
                     <div className="space-y-4">
-                        <ActivityItem text="Completed 'Phishing 101' Module" time="2h ago" />
-                        <ActivityItem text="Scanned suspicious URL: amazon-login-secure..." time="5h ago" />
-                        <ActivityItem text="Posted in Forum: 'SMS Scam Alert'" time="1d ago" />
+                        <ActivityItem text={`${t.dashboard.activity_module}: 'Phishing 101'`} time="2h ago" />
+                        <ActivityItem text={`${t.dashboard.activity_url}: amazon-login-secure...`} time="5h ago" />
+                        <ActivityItem text={`${t.dashboard.activity_forum}: 'SMS Scam Alert'`} time="1d ago" />
                     </div>
                 </div>
 
                 <div className="glass-panel p-6">
-                    <h2 className="text-xl font-bold mb-4">Quick Actions</h2>
+                    <h2 className="text-xl font-bold mb-4">{t.dashboard.quick_actions}</h2>
                     <div className="grid grid-cols-2 gap-4">
                         <Link href="/scan" className="p-4 bg-white/5 hover:bg-white/10 rounded-xl transition-colors flex flex-col items-center gap-2 text-center">
                             <Shield className="w-6 h-6 text-neon-blue" />
-                            <span>New Scan</span>
+                            <span>{t.dashboard.new_scan}</span>
                         </Link>
                         <Link href="/learn" className="p-4 bg-white/5 hover:bg-white/10 rounded-xl transition-colors flex flex-col items-center gap-2 text-center">
                             <BookOpen className="w-6 h-6 text-neon-purple" />
-                            <span>Continue Learning</span>
+                            <span>{t.dashboard.continue_learning}</span>
                         </Link>
                     </div>
                 </div>

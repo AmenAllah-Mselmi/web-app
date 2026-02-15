@@ -52,12 +52,12 @@ export default function ForumPage() {
                 ) : configError ? (
                     <div className="text-center py-20 text-red-400 bg-red-900/10 rounded-xl border border-red-500/20 shadow-lg">
                         <ShieldCheck className="w-12 h-12 mx-auto mb-4 opacity-50" />
-                        <h3 className="text-xl font-bold mb-2">Database Connection Failed</h3>
-                        <p>Missing Supabase configuration. Please check your .env.local file.</p>
+                        <h3 className="text-xl font-bold mb-2">{t.forum.db_error}</h3>
+                        <p>{t.forum.db_error_desc}</p>
                     </div>
                 ) : posts.length === 0 ? (
                     <div className="text-center py-20 text-gray-400">
-                        No discussions yet. Be the first to start one!
+                        {t.forum.no_discussions}
                     </div>
                 ) : (
                     <div className="grid gap-6">
@@ -73,7 +73,7 @@ export default function ForumPage() {
                                                 <span className="font-bold text-white">{post.profiles?.username || "Anonymous"}</span>
                                                 {post.profiles?.vulnerability_score && post.profiles.vulnerability_score < 30 && (
                                                     <span className="bg-neon-purple/20 text-neon-purple text-xs px-2 py-0.5 rounded border border-neon-purple">
-                                                        Expert
+                                                        {t.forum.expert}
                                                     </span>
                                                 )}
                                             </div>
@@ -85,7 +85,7 @@ export default function ForumPage() {
                                     {post.is_verified && (
                                         <div className="flex items-center gap-1 text-neon-green text-sm font-bold bg-neon-green/10 px-2 py-1 rounded">
                                             <ShieldCheck className="w-4 h-4" />
-                                            Verified Threat
+                                            {t.forum.verified_threat}
                                         </div>
                                     )}
                                 </div>
@@ -104,7 +104,7 @@ export default function ForumPage() {
                                             <ThumbsUp className="w-4 h-4" /> {post.likes}
                                         </div>
                                         <div className="flex items-center gap-1 hover:text-white transition-colors">
-                                            <MessageSquare className="w-4 h-4" /> Comment
+                                            <MessageSquare className="w-4 h-4" /> {t.forum.comment}
                                         </div>
                                     </div>
                                 </div>

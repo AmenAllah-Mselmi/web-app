@@ -106,27 +106,27 @@ export default function Home() {
       <section className="py-24 px-4 relative w-full">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">Future-Proof Defense</h2>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">{t.features.title}</h2>
             <p className="text-gray-400 max-w-2xl mx-auto text-lg">
-              Our triple-layer engine combines psychology, community data, and heuristic AI.
+              {t.features.subtitle}
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <FeatureCard
               icon={<BrainCircuit className="w-12 h-12 text-neon-purple" />}
-              title="Psychological Firewall"
-              description="Most hacks aren't code, they're social engineering. We profile your personal vulnerability not just your firewall."
+              title={t.features.f1_title}
+              description={t.features.f1_desc}
             />
             <FeatureCard
               icon={<Globe2 className="w-12 h-12 text-neon-green" />}
-              title="Live Community Radar"
-              description="See attacks happening in Tunisia in real-time. If one person is targeted, the whole community is immunized instantly."
+              title={t.features.f2_title}
+              description={t.features.f2_desc}
             />
             <FeatureCard
               icon={<ShieldAlert className="w-12 h-12 text-neon-red" />}
-              title="Zero-Day Detection"
-              description="Our heuristic engine doesn't just check blacklists. It analyzes intent, urgency loops, and brand impersonation logic."
+              title={t.features.f3_title}
+              description={t.features.f3_desc}
             />
           </div>
         </div>
@@ -141,12 +141,12 @@ export default function Home() {
           <div className="absolute top-0 right-0 w-64 h-64 bg-neon-blue/20 blur-[80px] -z-10 rounded-full" />
           <div className="absolute bottom-0 left-0 w-64 h-64 bg-neon-purple/20 blur-[80px] -z-10 rounded-full" />
 
-          <h2 className="text-4xl font-bold mb-6">Ready to secure your digital life?</h2>
+          <h2 className="text-4xl font-bold mb-6">{t.cta_banner.title}</h2>
           <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-            Join thousands of users in Tunisia who are staying one step ahead of scammers.
+            {t.cta_banner.subtitle}
           </p>
           <Link href="/register" className="inline-block px-10 py-5 bg-gradient-to-r from-neon-blue to-neon-purple text-white font-bold text-xl rounded-full hover:shadow-[0_0_30px_rgba(188,19,254,0.5)] transition-all transform hover:-translate-y-1">
-            Get Protected Now
+            {t.cta_banner.btn}
           </Link>
         </div>
       </section>

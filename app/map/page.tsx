@@ -75,14 +75,14 @@ export default function MapPage() {
                     className={`px-4 py-2 rounded-lg font-bold text-sm transition-colors border ${expertMode ? "bg-neon-purple/20 text-neon-purple border-neon-purple" : "bg-black/40 text-gray-400 border-gray-700"
                         }`}
                 >
-                    {expertMode ? "Expert Mode: ON" : "Expert Mode: OFF"}
+                    {expertMode ? t.map.expert_on : t.map.expert_off}
                 </button>
                 <button
                     onClick={() => setReportMode(true)}
                     className="bg-neon-red text-black font-bold px-4 py-2 rounded-lg hover:bg-white transition-colors flex items-center gap-2 shadow-neon-red"
                 >
                     <Plus className="w-5 h-5" />
-                    Report Threat
+                    {t.map.report_btn}
                 </button>
             </div>
 
@@ -103,34 +103,34 @@ export default function MapPage() {
                             </button>
                             <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
                                 <AlertTriangle className="text-neon-red" />
-                                Report New Threat
+                                {t.map.report_new}
                             </h2>
                             <form onSubmit={handleSubmit} className="space-y-4">
                                 <div>
-                                    <label className="block text-sm text-gray-300 mb-1">Threat Type</label>
+                                    <label className="block text-sm text-gray-300 mb-1">{t.map.form_type}</label>
                                     <select
                                         value={type}
                                         onChange={(e) => setType(e.target.value)}
                                         className="w-full bg-black/50 border border-gray-700 rounded-lg p-2"
                                     >
-                                        <option value="SMS">SMS Phishing</option>
-                                        <option value="Email">Email Scam</option>
-                                        <option value="URL">Malicious URL</option>
-                                        <option value="QR">Fake QR Code</option>
+                                        <option value="SMS">{t.map.threat_type_sms}</option>
+                                        <option value="Email">{t.map.threat_type_email}</option>
+                                        <option value="URL">{t.map.threat_type_url}</option>
+                                        <option value="QR">{t.map.threat_type_qr}</option>
                                     </select>
                                 </div>
                                 <div>
-                                    <label className="block text-sm text-gray-300 mb-1">Description</label>
+                                    <label className="block text-sm text-gray-300 mb-1">{t.map.form_desc}</label>
                                     <textarea
                                         required
                                         value={description}
                                         onChange={(e) => setDescription(e.target.value)}
                                         className="w-full bg-black/50 border border-gray-700 rounded-lg p-2 h-24"
-                                        placeholder="Describe the attack..."
+                                        placeholder={t.map.desc_placeholder}
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-sm text-gray-300 mb-1">Location</label>
+                                    <label className="block text-sm text-gray-300 mb-1">{t.map.form_loc}</label>
                                     <button
                                         type="button"
                                         onClick={handleGetLocation}
@@ -138,7 +138,7 @@ export default function MapPage() {
                                             }`}
                                     >
                                         <MapPin className="w-4 h-4" />
-                                        {location ? `Location set: ${location.lat.toFixed(2)}, ${location.lng.toFixed(2)}` : "Use My Location"}
+                                        {location ? `${t.map.location_set}: ${location.lat.toFixed(2)}, ${location.lng.toFixed(2)}` : t.map.use_location}
                                     </button>
                                 </div>
                                 <button
@@ -146,7 +146,7 @@ export default function MapPage() {
                                     disabled={loading}
                                     className="w-full bg-neon-red text-black font-bold py-3 rounded-lg hover:bg-white transition-colors mt-4 disabled:opacity-50"
                                 >
-                                    {loading ? "Submitting..." : "Submit Report"}
+                                    {loading ? t.map.submitting : t.map.form_submit}
                                 </button>
                             </form>
                         </div>
@@ -158,13 +158,13 @@ export default function MapPage() {
             {expertMode && (
                 <div className="mt-4 glass-panel p-4 border border-neon-purple/50">
                     <h3 className="text-neon-purple font-bold flex items-center gap-2 mb-2">
-                        <ShieldCheck className="w-5 h-5" /> Expert Verification Queue
+                        <ShieldCheck className="w-5 h-5" /> {t.map.expert_queue}
                     </h3>
                     <div className="flex items-center justify-between bg-white/5 p-3 rounded-lg">
-                        <span>UNVERIFIED REPORT: "Fake STEG Bill" at 36.8, 10.1</span>
+                        <span>{t.map.unverified}: "Fake STEG Bill" at 36.8, 10.1</span>
                         <div className="flex gap-2">
-                            <button className="bg-neon-green/20 text-neon-green px-3 py-1 rounded text-xs border border-neon-green">Verify</button>
-                            <button className="bg-red-500/20 text-red-500 px-3 py-1 rounded text-xs border border-red-500">Dismiss</button>
+                            <button className="bg-neon-green/20 text-neon-green px-3 py-1 rounded text-xs border border-neon-green">{t.map.verify}</button>
+                            <button className="bg-red-500/20 text-red-500 px-3 py-1 rounded text-xs border border-red-500">{t.map.dismiss}</button>
                         </div>
                     </div>
                 </div>
@@ -173,15 +173,15 @@ export default function MapPage() {
             <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="glass-panel p-4 text-center">
                     <h3 className="text-neon-red font-bold text-2xl">124</h3>
-                    <p className="text-gray-400">Active Threats</p>
+                    <p className="text-gray-400">{t.map.active_threats}</p>
                 </div>
                 <div className="glass-panel p-4 text-center">
                     <h3 className="text-neon-green font-bold text-2xl">98%</h3>
-                    <p className="text-gray-400">Community Verified</p>
+                    <p className="text-gray-400">{t.map.verified}</p>
                 </div>
                 <div className="glass-panel p-4 text-center">
                     <h3 className="text-neon-blue font-bold text-2xl">Tunisian Post</h3>
-                    <p className="text-gray-400">Top Target Today</p>
+                    <p className="text-gray-400">{t.map.top_target}</p>
                 </div>
             </div>
         </div>

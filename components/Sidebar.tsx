@@ -5,10 +5,13 @@ import { usePathname } from "next/navigation";
 import { ShieldCheck, LayoutDashboard, Users, BookOpen, Map, Settings, LogOut, ScanLine } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { useRouter } from "next/navigation";
+import { useLanguage } from "@/lib/i18n";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 export default function Sidebar({ onLinkClick }: { onLinkClick?: () => void }) {
     const pathname = usePathname();
     const router = useRouter();
+    const { t } = useLanguage();
 
     const handleLogout = async () => {
         if (onLinkClick) onLinkClick();
@@ -18,11 +21,11 @@ export default function Sidebar({ onLinkClick }: { onLinkClick?: () => void }) {
     };
 
     const links = [
-        { href: "/dashboard", label: "Overview", icon: LayoutDashboard },
-        { href: "/forum", label: "Community", icon: Users },
-        { href: "/learn", label: "Academy", icon: BookOpen },
-        { href: "/map", label: "Threat Map", icon: Map },
-        { href: "/settings", label: "Settings", icon: Settings },
+        { href: "/dashboard", label: t.nav.dashboard, icon: LayoutDashboard },
+        { href: "/forum", label: t.nav.forum, icon: Users },
+        { href: "/learn", label: t.nav.learn, icon: BookOpen },
+        { href: "/map", label: t.nav.map, icon: Map },
+        { href: "/settings", label: t.nav.settings, icon: Settings },
     ];
 
     return (
@@ -54,13 +57,17 @@ export default function Sidebar({ onLinkClick }: { onLinkClick?: () => void }) {
                 })}
             </nav>
 
-            <div className="p-4 border-t border-white/10">
+            <div className="p-4 border-t border-white/10 space-y-2">
+                <div className="px-4 py-2">
+                    <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-2">{t.nav.language_label || "Language"}</p>
+                    <LanguageSwitcher />
+                </div>
                 <button
                     onClick={handleLogout}
                     className="flex items-center gap-3 px-4 py-3 text-red-400 hover:bg-red-500/10 hover:text-red-300 rounded-lg w-full transition-colors"
                 >
                     <LogOut className="w-5 h-5" />
-                    <span className="font-medium">Sign Out</span>
+                    <span className="font-medium">{t.auth.logout}</span>
                 </button>
             </div>
         </aside>

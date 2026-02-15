@@ -25,10 +25,10 @@ export default function Navbar() {
                     </div>
                     <div className="hidden md:block">
                         <div className="ml-10 flex items-baseline space-x-4">
-                             <NavLink href="/">Home</NavLink>
+                            <NavLink href="/">{t.nav.home}</NavLink>
                             <NavLink href="/scan">{t.nav.scanner}</NavLink>
-                            <NavLink href="/#about">About Us</NavLink>
-                            <NavLink href="/#contact">Contact</NavLink>
+                            <NavLink href="/#about">{t.nav.about}</NavLink>
+                            <NavLink href="/#contact">{t.nav.contact}</NavLink>
                         </div>
                     </div>
                     <div className="hidden md:flex items-center gap-4">
@@ -59,9 +59,10 @@ export default function Navbar() {
                         className="md:hidden glass-panel mx-2 overflow-hidden"
                     >
                         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                            <MobileNavLink href="/">{t.nav.home}</MobileNavLink>
                             <MobileNavLink href="/scan">{t.nav.scanner}</MobileNavLink>
-                            <MobileNavLink href="/#about">About Us</MobileNavLink>
-                            <MobileNavLink href="/#contact">Contact</MobileNavLink>
+                            <MobileNavLink href="/#about">{t.nav.about}</MobileNavLink>
+                            <MobileNavLink href="/#contact">{t.nav.contact}</MobileNavLink>
                             <div className="border-t border-gray-700 pt-4 mt-2">
                                 <MobileNavLink href="/login">{t.nav.login}</MobileNavLink>
                             </div>

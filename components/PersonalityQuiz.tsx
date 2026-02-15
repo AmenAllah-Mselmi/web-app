@@ -4,8 +4,10 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { questions, calculateAdvancedPersonality } from "@/lib/quiz-data";
 import { ChevronRight, RefreshCcw, ShieldAlert, BookOpen, Skull } from "lucide-react";
+import { useLanguage } from "@/lib/i18n";
 
 export default function PersonalityTest() {
+    const { t } = useLanguage();
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [answers, setAnswers] = useState<Record<number, number>>({});
     const [showResult, setShowResult] = useState(false);
@@ -25,7 +27,8 @@ export default function PersonalityTest() {
         setShowResult(false);
     };
 
-    const result = showResult ? calculateAdvancedPersonality(answers) : null;
+    const result = showResult ? calculateAdvancedPersonality(answers, t) : null;
+    const currentQData = t.quiz.questions[currentQuestion];
 
     return (
         <div className="w-full max-w-3xl mx-auto glass-panel p-8 min-h-[500px] flex flex-col justify-center relative overflow-hidden">
@@ -44,9 +47,9 @@ export default function PersonalityTest() {
                         <div className="mb-8">
                             <div className="flex justify-between items-center mb-2">
                                 <span className="text-neon-blue text-sm font-bold tracking-widest uppercase">
-                                    Question {currentQuestion + 1} / {questions.length}
+                                    {t.quiz.question} {currentQuestion + 1} / {questions.length}
                                 </span>
-                                <span className="text-gray-500 text-xs uppercase tracking-wider">{questions[currentQuestion].trait} Check</span>
+                                <span className="text-gray-500 text-xs uppercase tracking-wider">{questions[currentQuestion].trait} {t.quiz.check}</span>
                             </div>
                             <div className="w-full bg-gray-800 h-1 rounded-full mb-6">
                                 <div
@@ -54,10 +57,10 @@ export default function PersonalityTest() {
                                     style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
                                 />
                             </div>
-                            <h2 className="text-2xl font-bold mt-2 leading-relaxed">{questions[currentQuestion].text}</h2>
+                            <h2 className="text-2xl font-bold mt-2 leading-relaxed">{currentQData.text}</h2>
                         </div>
                         <div className="space-y-4">
-                            {questions[currentQuestion].options.map((option, idx) => (
+                            {currentQData.options.map((option: any, idx: number) => (
                                 <button
                                     key={idx}
                                     onClick={() => handleAnswer(option.score)}
@@ -76,7 +79,7 @@ export default function PersonalityTest() {
                         animate={{ opacity: 1, scale: 1 }}
                         className="text-center"
                     >
-                        <h2 className="text-gray-400 text-sm tracking-[0.2em] mb-4 uppercase">Analysis Complete</h2>
+                        <h2 className="text-gray-400 text-sm tracking-[0.2em] mb-4 uppercase">{t.quiz.analysis_complete}</h2>
 
                         <div className="inline-block p-4 rounded-full bg-white/5 mb-4 border border-white/10 shadow-neon">
                             <Skull className="w-12 h-12 text-neon-red" />
@@ -93,29 +96,29 @@ export default function PersonalityTest() {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10 text-left">
                             <div className="glass-panel p-6 border-l-4 border-neon-red bg-red-900/10">
                                 <div className="flex items-center gap-2 mb-2 text-neon-red font-bold uppercase text-xs tracking-wider">
-                                    <ShieldAlert className="w-4 h-4" /> Recommended Simulation
+                                    <ShieldAlert className="w-4 h-4" /> {t.quiz.recommended_sim}
                                 </div>
                                 <h3 className="text-lg font-bold text-white mb-2">{result?.simulation}</h3>
                                 <p className="text-sm text-gray-400">
-                                    We will simulate this attack on you within 7 days to test your immunity.
+                                    {t.quiz.simulation_desc}
                                 </p>
                             </div>
 
                             <div className="glass-panel p-6 border-l-4 border-neon-green bg-green-900/10">
                                 <div className="flex items-center gap-2 mb-2 text-neon-green font-bold uppercase text-xs tracking-wider">
-                                    <BookOpen className="w-4 h-4" /> Training Focus
+                                    <BookOpen className="w-4 h-4" /> {t.quiz.training_focus}
                                 </div>
                                 <h3 className="text-lg font-bold text-white mb-2">{result?.trainingFocus}</h3>
                                 <p className="text-sm text-gray-400">
-                                    Assigning module: <span className="underline decoration-neon-green/50 cursor-pointer hover:text-white">Start Learning &rarr;</span>
+                                    Assigning module: <span className="underline decoration-neon-green/50 cursor-pointer hover:text-white">{t.quiz.start_learning} &rarr;</span>
                                 </p>
                             </div>
                         </div>
 
                         <div className="p-6 bg-glass-200 rounded-xl mb-8">
                             <div className="flex justify-between text-sm font-bold text-gray-400 mb-2">
-                                <span>Vulnerability Score</span>
-                                <span>{Math.round((result!.totalScore / 150) * 100)}% Risk</span>
+                                <span>{t.quiz.vulnerability_score}</span>
+                                <span>{Math.round((result!.totalScore / 150) * 100)}% {t.quiz.risk}</span>
                             </div>
                             <div className="w-full bg-gray-800 h-4 rounded-full overflow-hidden">
                                 <div
@@ -129,7 +132,7 @@ export default function PersonalityTest() {
                             onClick={restart}
                             className="px-8 py-3 bg-white text-black rounded-full font-bold hover:bg-gray-200 transition-colors flex items-center gap-2 mx-auto"
                         >
-                            <RefreshCcw className="w-5 h-5" /> Retake Analysis
+                            <RefreshCcw className="w-5 h-5" /> {t.quiz.retake}
                         </button>
                     </motion.div>
                 )}

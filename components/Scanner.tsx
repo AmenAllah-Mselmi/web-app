@@ -4,8 +4,10 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Search, AlertTriangle, CheckCircle, XCircle } from "lucide-react";
 import { calculateRiskScore, ScanResult } from "@/lib/risk-scoring";
+import { useLanguage } from "@/lib/i18n";
 
 export default function Scanner() {
+    const { t } = useLanguage();
     const [input, setInput] = useState("");
     const [isScanning, setIsScanning] = useState(false);
     const [result, setResult] = useState<ScanResult | null>(null);
@@ -32,7 +34,7 @@ export default function Scanner() {
                     type="text"
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
-                    placeholder="Paste URL, SMS text, or Email content here..."
+                    placeholder={t.scan.placeholder}
                     className="w-full bg-glass-100 border border-glass-200 rounded-full py-4 pl-6 pr-14 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-neon-blue transition-all shadow-neon"
                 />
                 <button
@@ -51,12 +53,12 @@ export default function Scanner() {
                     className="mt-8 glass-panel p-6"
                 >
                     <div className="flex items-center justify-between mb-4">
-                        <h3 className="text-xl font-bold">Analysis Result</h3>
+                        <h3 className="text-xl font-bold">{t.scan.result_title}</h3>
                         <span className={`px-4 py-1 rounded-full text-sm font-bold ${result.riskLevel === "Safe" ? "bg-neon-green/20 text-neon-green border border-neon-green" :
-                                result.riskLevel === "High Risk" ? "bg-neon-red/20 text-neon-red border border-neon-red shadow-neon-red" :
-                                    "bg-orange-500/20 text-orange-400 border border-orange-400"
+                            result.riskLevel === "High Risk" ? "bg-neon-red/20 text-neon-red border border-neon-red shadow-neon-red" :
+                                "bg-orange-500/20 text-orange-400 border border-orange-400"
                             }`}>
-                            {result.riskLevel}
+                            {result.riskLevel === "Safe" ? t.scan.safe : result.riskLevel === "High Risk" ? t.scan.high_risk : t.scan.suspicious}
                         </span>
                     </div>
 
@@ -77,7 +79,7 @@ export default function Scanner() {
                             <span className="absolute text-2xl font-bold">{result.score}%</span>
                         </div>
                         <div>
-                            <p className="text-gray-400">Threat Type</p>
+                            <p className="text-gray-400">{t.scan.threat_type}</p>
                             <p className="font-semibold text-lg">{result.threatType}</p>
                         </div>
                     </div>
@@ -93,7 +95,7 @@ export default function Scanner() {
                         ) : (
                             <div className="flex items-center gap-2 text-neon-green">
                                 <CheckCircle className="w-5 h-5" />
-                                No obvious threats detected.
+                                {t.scan.no_threats}
                             </div>
                         )}
                     </div>

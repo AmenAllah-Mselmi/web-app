@@ -4,10 +4,12 @@ import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
 import { User, Shield, Bell, Key, Save, Loader2 } from "lucide-react";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/i18n";
 
 import { ProfileForm, SecuritySettings, NotificationSettings } from "@/components/SettingsComponents";
 
 export default function SettingsPage() {
+    const { t } = useLanguage();
     const [activeTab, setActiveTab] = useState("profile");
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
@@ -46,7 +48,7 @@ export default function SettingsPage() {
             alert("Error updating profile: " + error.message);
         } else {
             setOriginalProfile(profile);
-            alert("Profile updated successfully!");
+            alert(t.settings.success);
         }
         setSaving(false);
     };
@@ -60,15 +62,15 @@ export default function SettingsPage() {
     }
 
     const tabs = [
-        { id: "profile", label: "Profile", icon: User },
-        { id: "security", label: "Security", icon: Shield },
-        { id: "notifications", label: "Notifications", icon: Bell },
-        { id: "api", label: "API Keys", icon: Key },
+        { id: "profile", label: t.settings.tab_profile, icon: User },
+        { id: "security", label: t.settings.tab_security, icon: Shield },
+        { id: "notifications", label: t.settings.tab_notifications, icon: Bell },
+        { id: "api", label: t.settings.tab_api, icon: Key },
     ];
 
     return (
         <div className="max-w-4xl mx-auto py-8 px-4">
-            <h1 className="text-4xl font-bold mb-8 neon-text uppercase tracking-widest">Settings Console</h1>
+            <h1 className="text-4xl font-bold mb-8 neon-text uppercase tracking-widest">{t.settings.title}</h1>
 
             <div className="flex flex-col md:flex-row gap-8">
                 {/* Sidebar Tabs */}
@@ -80,8 +82,8 @@ export default function SettingsPage() {
                                 key={tab.id}
                                 onClick={() => setActiveTab(tab.id)}
                                 className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${activeTab === tab.id
-                                        ? "bg-neon-blue/20 text-neon-blue border border-neon-blue/50 shadow-[0_0_15px_rgba(0,194,255,0.1)]"
-                                        : "text-gray-400 hover:bg-white/5 hover:text-white"
+                                    ? "bg-neon-blue/20 text-neon-blue border border-neon-blue/50 shadow-[0_0_15px_rgba(0,194,255,0.1)]"
+                                    : "text-gray-400 hover:bg-white/5 hover:text-white"
                                     }`}
                             >
                                 <Icon className="w-5 h-5" />
@@ -109,8 +111,8 @@ export default function SettingsPage() {
                     {activeTab === "api" && (
                         <div className="flex flex-col items-center justify-center py-12 text-gray-500">
                             <Key className="w-12 h-12 mb-4 opacity-20" />
-                            <h2 className="text-xl font-bold mb-2">API Control</h2>
-                            <p>This terminal is currently restricted.</p>
+                            <h2 className="text-xl font-bold mb-2">{t.settings.api_control}</h2>
+                            <p>{t.settings.restricted}</p>
                         </div>
                     )}
                 </div>

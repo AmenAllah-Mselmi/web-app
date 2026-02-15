@@ -8,11 +8,13 @@ import Sidebar from "@/components/Sidebar";
 import ChatAssistant from "@/components/ChatAssistant";
 import { Loader2, Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
+import { useLanguage } from "@/lib/i18n";
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
     const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const pathname = usePathname();
+    const { dir, lang, t } = useLanguage();
 
     useEffect(() => {
         const checkAuth = async () => {
@@ -54,8 +56,8 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
             <div className="min-h-screen bg-background flex relative overflow-hidden">
                 {/* Mobile Header avec bouton menu */}
                 <div className="md:hidden fixed top-0 left-0 right-0 h-16 bg-black/80 backdrop-blur-md border-b border-white/10 flex items-center justify-between px-4 z-40">
-                    <button 
-                        onClick={() => setIsSidebarOpen(true)} 
+                    <button
+                        onClick={() => setIsSidebarOpen(true)}
                         className="p-2 text-white hover:bg-white/10 rounded-lg transition-colors"
                         aria-label="Ouvrir le menu"
                     >

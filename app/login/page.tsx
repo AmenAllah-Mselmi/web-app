@@ -68,7 +68,7 @@ export default function LoginPage() {
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 className={`w-full bg-black/40 border border-gray-700 rounded-xl py-3 px-10 focus:outline-none focus:border-neon-blue focus:ring-1 focus:ring-neon-blue transition-all`}
-                                placeholder="name@example.com"
+                                placeholder={t.auth.email_placeholder}
                             />
                         </div>
                     </div>
@@ -83,7 +83,7 @@ export default function LoginPage() {
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 className={`w-full bg-black/40 border border-gray-700 rounded-xl py-3 px-10 focus:outline-none focus:border-neon-blue focus:ring-1 focus:ring-neon-blue transition-all`}
-                                placeholder="••••••••"
+                                placeholder={t.auth.password_placeholder}
                             />
                         </div>
                     </div>

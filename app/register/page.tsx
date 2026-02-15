@@ -86,7 +86,7 @@ export default function RegisterPage() {
                                 value={username}
                                 onChange={(e) => setUsername(e.target.value)}
                                 className={`w-full bg-black/40 border border-gray-700 rounded-xl py-3 px-10 focus:outline-none focus:border-neon-green focus:ring-1 focus:ring-neon-green transition-all`}
-                                placeholder="CyberSentinel"
+                                placeholder={t.auth.username_placeholder}
                             />
                         </div>
                     </div>
@@ -101,7 +101,7 @@ export default function RegisterPage() {
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 className={`w-full bg-black/40 border border-gray-700 rounded-xl py-3 px-10 focus:outline-none focus:border-neon-green focus:ring-1 focus:ring-neon-green transition-all`}
-                                placeholder="name@example.com"
+                                placeholder={t.auth.email_placeholder}
                             />
                         </div>
                     </div>
@@ -116,7 +116,7 @@ export default function RegisterPage() {
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 className={`w-full bg-black/40 border border-gray-700 rounded-xl py-3 px-10 focus:outline-none focus:border-neon-green focus:ring-1 focus:ring-neon-green transition-all`}
-                                placeholder="••••••••"
+                                placeholder={t.auth.password_placeholder}
                             />
                         </div>
                     </div>
